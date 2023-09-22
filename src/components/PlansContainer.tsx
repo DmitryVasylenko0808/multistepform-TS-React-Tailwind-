@@ -1,12 +1,17 @@
 import React from "react";
 import PlanCard from "./PlanCard";
+import { Period, PlanWithCardState } from "../types";
 
-const PlansContainer = () => {
-    const array = [1, 2, 3];
+type PlansContainerProps = {
+    plans: PlanWithCardState[];
+    period: Period;
+    onActivePlan: (id: number) => void;
+}
 
+const PlansContainer = ({ plans, period, onActivePlan }: PlansContainerProps) => {
     return (
         <div className="mb-8 flex gap-x-5">
-            {array.map(item => <PlanCard />)}
+            {plans.map(p => <PlanCard {...p} period={period} onActive={() => onActivePlan(p.id)} />)}
         </div>
     )
 }
